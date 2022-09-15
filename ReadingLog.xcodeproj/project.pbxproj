@@ -13,6 +13,7 @@
 		165DD29828D149D7002B39C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 165DD29728D149D7002B39C5 /* Preview Assets.xcassets */; };
 		165DD2A028D1FD22002B39C5 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165DD29F28D1FD22002B39C5 /* Book.swift */; };
 		165DD2A228D213A8002B39C5 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165DD2A128D213A8002B39C5 /* Debouncer.swift */; };
+		165DD2C828D37495002B39C5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165DD2C728D37495002B39C5 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		165DD29E28D14C1C002B39C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		165DD29F28D1FD22002B39C5 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		165DD2A128D213A8002B39C5 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		165DD2C728D37495002B39C5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				165DD29028D149D5002B39C5 /* BookApp.swift */,
 				165DD29F28D1FD22002B39C5 /* Book.swift */,
 				165DD29228D149D5002B39C5 /* ContentView.swift */,
+				165DD2C728D37495002B39C5 /* SearchView.swift */,
 				165DD2A128D213A8002B39C5 /* Debouncer.swift */,
 				165DD29428D149D7002B39C5 /* Assets.xcassets */,
 				165DD29628D149D7002B39C5 /* Preview Content */,
@@ -149,6 +152,7 @@
 				165DD2A228D213A8002B39C5 /* Debouncer.swift in Sources */,
 				165DD2A028D1FD22002B39C5 /* Book.swift in Sources */,
 				165DD29128D149D5002B39C5 /* BookApp.swift in Sources */,
+				165DD2C828D37495002B39C5 /* SearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
