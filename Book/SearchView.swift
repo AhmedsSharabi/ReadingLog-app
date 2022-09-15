@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct SearchView: View {
     @State private var pages = [Item]()
     @StateObject var searchQuery = DebounceState(initialValue: "")
     @State private var readingSatuts = false
@@ -112,6 +112,6 @@ struct SwiftUIView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        SearchView()
     }
 }
