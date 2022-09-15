@@ -24,4 +24,5 @@ struct Volume: Codable {
 }
 struct Images:Codable {
     let smallThumbnail: String
+    let thumbnail: String 
 }
