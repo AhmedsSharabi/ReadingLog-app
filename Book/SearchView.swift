@@ -88,9 +88,6 @@ struct SearchView: View {
                 Button("Read Pile") {}
                 Button("Currently reading pile") {}
             }
-            Button("Ok"){
-                print(readingSatuts)
-            }
             
         }
     }
@@ -120,7 +117,8 @@ struct SearchView: View {
             do {
                 let decoder = JSONDecoder()
                 let data = try decoder.decode(Book.self, from: data)
-                books = data.items
+                let slicedBooks = data.items.sliceArray(upTo: 5)
+                books = slicedBooks
                 
             } catch {
                 print("couldn't decode data", error)

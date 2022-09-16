@@ -17,9 +17,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Add Book", systemImage: "plus")
                 }
-            BookView(filter: .tbr)
+            BookView(filter: .all)
                 .tabItem {
-                    Label("Books", systemImage: "plus")
+                    Label("Books", systemImage: "books.vertical")
                 }
         }
         .environmentObject(books)

@@ -9,31 +9,70 @@ import SwiftUI
 
 struct BookView: View {
     @EnvironmentObject var books: Library
+    @State private var bookFilter: Library.FilterType = .all
     
-    enum FilterType {
-        case read, tbr, reading
-    }
     
-    let filter: FilterType
+    let adaptiveColumn = [
+        GridItem(.adaptive(minimum: 90))
+    ]
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(filteredBooks){ book in
-                    Text(book.info.volumeInfo.title)
+            HStack {
+                Text("Filter by:")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
+                
+                Spacer()
+                
+                Picker("Select", selection: $bookFilter) {
+                    Text("All").tag(Library.FilterType.all)
+                    Text("Read").tag(Library.FilterType.read)
+                    Text("TBR").tag(Library.FilterType.tbr)
+                    Text("Currently Reading").tag(Library.FilterType.reading)
                 }
+                .padding(.horizontal)
+
             }
+                List {
+                    ForEach(filteredBooks){ book in
+                        HStack {
+                            AsyncImage (url: URL(string: book.info.volumeInfo.imageLinks?.thumbnail ?? "no-image")) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 70)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text(book.info.volumeInfo.title)
+                                Text(book.info.volumeInfo.authors?[0] ??  "Unknown Author")
+                            }
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                        }
+                }
+                }
+                .navigationTitle("My Books")
+                .navigationBarTitleDisplayMode(.inline)
+
+            
             }
         }
     
     var filteredBooks: [SavedBook] {
-        switch filter {
+        switch bookFilter {
+        case .all:
+            return books.books
         case .read:
-            return books.books
+            return books.books.filter{ $0.readingState == "read" }
         case .reading:
-            return books.books
+            return books.books.filter{ $0.readingState == "reading" }
         case .tbr :
-            return books.books
+            return books.books.filter{ $0.readingState == "tbr" }
         }
     }
     }

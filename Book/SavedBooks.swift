@@ -11,14 +11,16 @@ class SavedBook: Identifiable, Codable {
     var id = UUID()
     var info: Item = Item(id: "", volumeInfo: Volume(title: "", subtitle: "", authors: [], imageLinks: Images(smallThumbnail: "", thumbnail: "")))
     var notes = ""
+    var readingState = ""
+    
+   
 }
 
 
 
- class Library: ObservableObject {
+class Library: ObservableObject {
     @Published var books: [SavedBook]
-
-    
+     
     init() {
         do {
             let data = try Data(contentsOf: FileManager.documentsDirectory.appendingPathComponent("SaveBooks"))
@@ -41,6 +43,14 @@ class SavedBook: Identifiable, Codable {
         books.append(book)
         save()
     }
+    
+    enum FilterType {
+        case all, read, tbr, reading
+    }
+    
+    
+    
+    
 }
 
     
