@@ -10,15 +10,19 @@ import SwiftUI
 
 
 struct ContentView: View {
+    var books = Library()
     var body: some View {
-        SearchView()
-    }
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        TabView {
+            SearchView()
+                .tabItem {
+                    Label("Add Book", systemImage: "plus")
+                }
+            BookView(filter: .tbr)
+                .tabItem {
+                    Label("Books", systemImage: "plus")
+                }
+        }
+        .environmentObject(books)
     }
 }
 

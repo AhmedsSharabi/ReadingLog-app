@@ -12,6 +12,7 @@ struct Book: Codable {
 }
 
 struct Item: Codable {
+    
     let id: String
     let volumeInfo: Volume
 }
@@ -24,5 +25,6 @@ struct Volume: Codable {
 }
 struct Images:Codable {
     let smallThumbnail: String
-    let thumbnail: String 
+    let thumbnail: String
 }
+

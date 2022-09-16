@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var pages = [Item]()
+    @State private var books = [Item]()
     @StateObject var searchQuery = DebounceState(initialValue: "")
     @State private var readingSatuts = false
+    @EnvironmentObject var savedBooks: Library
+    @State private var stausSelected = false
+    
+    enum FilterType {
+        case none, read, tbr
+    }
+    
     
     var body: some View {
         NavigationStack {
-            List{
-                ForEach(pages, id: \.id){ page in
+            if books.isEmpty {
+                    Text("Search to add books to your \n collection...")
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .frame(height: 500)
+            }
+            List {
+                ForEach(books, id: \.id){ page in
                     HStack {
                         if page.volumeInfo.imageLinks?.smallThumbnail != nil {
                             AsyncImage (url: URL(string: page.volumeInfo.imageLinks?.smallThumbnail ?? "no-image")) { image in
@@ -47,6 +60,9 @@ struct SearchView: View {
                         
                         Button {
                             readingSatuts = true
+                            let book = SavedBook()
+                            book.info = page
+                            savedBooks.add(book)
                         } label: {
                             Image(systemName: "plus.circle")
                                 .imageScale(.large)
@@ -56,6 +72,7 @@ struct SearchView: View {
                     
                 }
             }
+            .navigationTitle("Seaech for books")
             .listStyle(.plain)
             .searchable(text: $searchQuery.currentValue)
             .onChange(of: searchQuery.debouncedValue){ new in
@@ -63,7 +80,7 @@ struct SearchView: View {
                 if !searchQuery.debouncedValue.isEmpty {
                     getData()
                 } else {
-                    pages.removeAll()
+                    books.removeAll()
                 }
             }
             .confirmationDialog("Add to:", isPresented: $readingSatuts, titleVisibility: .visible) {
@@ -71,9 +88,16 @@ struct SearchView: View {
                 Button("Read Pile") {}
                 Button("Currently reading pile") {}
             }
+            Button("Ok"){
+                print(readingSatuts)
+            }
+            
         }
     }
+
     
+    
+   
     func getData() {
         let newString = searchQuery.debouncedValue.replacingOccurrences(of: " ", with: "+")
         guard let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(newString)") else { return }
@@ -96,7 +120,7 @@ struct SearchView: View {
             do {
                 let decoder = JSONDecoder()
                 let data = try decoder.decode(Book.self, from: data)
-                pages = data.items
+                books = data.items
                 
             } catch {
                 print("couldn't decode data", error)
@@ -109,9 +133,3 @@ struct SearchView: View {
     }
 }
 
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}
