@@ -19,3 +19,15 @@ extension Array {
         
     }
 }
+
+extension String {
+    func fixStringURL() -> Self {
+        
+        let fixedURL = self.replacingOccurrences(of: " ", with: "+")
+            .replacingOccurrences(of: "'", with: "%27")
+        
+        return String(fixedURL)
+        
+    }
+}
+

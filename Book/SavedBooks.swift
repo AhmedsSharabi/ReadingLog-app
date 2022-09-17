@@ -12,8 +12,6 @@ class SavedBook: Identifiable, Codable {
     var info: Item = Item(id: "", volumeInfo: Volume(title: "", subtitle: "", authors: [], imageLinks: Images(smallThumbnail: "", thumbnail: "")))
     var notes = ""
     var readingState = ""
-    
-   
 }
 
 
@@ -39,8 +37,14 @@ class Library: ObservableObject {
         }
     }
     
-    func add(_ book: SavedBook) {
+    func add(_ book: SavedBook, mark: String) {
         books.append(book)
+        book.readingState = mark
+        save()
+    }
+    
+    func removeBook(at offsets: IndexSet) {
+        books.remove(atOffsets: offsets)
         save()
     }
     

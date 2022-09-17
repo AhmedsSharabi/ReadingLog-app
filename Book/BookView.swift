@@ -12,9 +12,7 @@ struct BookView: View {
     @State private var bookFilter: Library.FilterType = .all
     
     
-    let adaptiveColumn = [
-        GridItem(.adaptive(minimum: 90))
-    ]
+    let filter: Library.FilterType
     
     var body: some View {
         NavigationStack {
@@ -24,7 +22,7 @@ struct BookView: View {
                     .foregroundColor(.secondary)
                     .padding(.horizontal)
                 
-                Spacer()
+                
                 
                 Picker("Select", selection: $bookFilter) {
                     Text("All").tag(Library.FilterType.all)
@@ -33,6 +31,7 @@ struct BookView: View {
                     Text("Currently Reading").tag(Library.FilterType.reading)
                 }
                 .padding(.horizontal)
+                .foregroundColor(.purple)
 
             }
                 List {
@@ -55,6 +54,7 @@ struct BookView: View {
                                 .padding(.horizontal)
                         }
                 }
+                    .onDelete(perform: books.removeBook)
                 }
                 .navigationTitle("My Books")
                 .navigationBarTitleDisplayMode(.inline)

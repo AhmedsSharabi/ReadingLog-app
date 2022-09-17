@@ -13,6 +13,7 @@ struct SearchView: View {
     @State private var readingSatuts = false
     @EnvironmentObject var savedBooks: Library
     @State private var stausSelected = false
+    @State private var selectedItem: Item?
     
     enum FilterType {
         case none, read, tbr
@@ -59,10 +60,8 @@ struct SearchView: View {
                         Spacer()
                         
                         Button {
+                            selectedItem = page
                             readingSatuts = true
-                            let book = SavedBook()
-                            book.info = page
-                            savedBooks.add(book)
                         } label: {
                             Image(systemName: "plus.circle")
                                 .imageScale(.large)
@@ -83,20 +82,26 @@ struct SearchView: View {
                     books.removeAll()
                 }
             }
-            .confirmationDialog("Add to:", isPresented: $readingSatuts, titleVisibility: .visible) {
-                Button("TBR pile") {}
-                Button("Read Pile") {}
-                Button("Currently reading pile") {}
+            .confirmationDialog("Add To", isPresented: $readingSatuts, titleVisibility: .visible, presenting: selectedItem) { item in
+                Button("TBR pile") {saveToMyBooks(item: item, mark: "tbr")}
+                Button("Read Pile") {saveToMyBooks(item: item, mark: "read")}
+                Button("Currently reading pile") {saveToMyBooks(item: item, mark: "reading")}
             }
-            
         }
     }
 
     
     
    
+    func saveToMyBooks(item: Item, mark: String){
+        let book = SavedBook()
+        book.info = item
+        savedBooks.add(book, mark: mark)
+    }
+    
     func getData() {
-        let newString = searchQuery.debouncedValue.replacingOccurrences(of: " ", with: "+")
+        let newString = searchQuery.debouncedValue.fixStringURL()
+        print(newString)
         guard let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(newString)") else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {
