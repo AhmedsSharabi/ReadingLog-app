@@ -52,54 +52,42 @@ struct BookView: View {
                                 Text(book.info.volumeInfo.authors?[0] ??  "Unknown Author")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
-                                HStack(alignment: .center) {
-                                    Text("Read")
-                                        .font(.caption.bold())
-                                    Image(systemName: "chevron.down")
-                                        .font(.system(size: 10, weight: .light))
-                                       
+                                if bookFilter == .all {
+                                    HStack(alignment: .center) {
+                                        if book.readingState == "read" {
+                                            Text("Read")
+                                                .font(.caption.bold())
+                                        } else if book.readingState == "tbr" {
+                                            Text("TBR")
+                                                .font(.caption.bold())
+                                        } else {
+                                            Text("Reading")
+                                                .font(.caption.bold())
+                                        }
+                                        Image(systemName: "chevron.down")
+                                            .font(.system(size: 10, weight: .light))
                                         
+                                        
+                                    }
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 5)
+                                    .background(.black)
+                                    .cornerRadius(10)
                                 }
-                                .foregroundColor(.white)
-                                .padding(.horizontal)
-                                .padding(.vertical, 5)
-                                .background(.black)
-                                .cornerRadius(10)
                             }
                             }
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
-                            
-                          
-                            
-//                        .contextMenu {
-//                                Button {
-//                                    print(book)
-//                                } label:{
-//                                    Label("Mark as Read", systemImage: "book.closed")
-//                            }
-//                                Button {
-//                                    print(book)
-//                                } label: {
-//                                    Label("Mark as Currently Reading", systemImage: "book")
-//                                }
-//                                Button {
-//                                    print(book)
-//                                } label: {
-//                                    Label("Mark as TBR", systemImage: "bookmark")
-//                                }
-
-//                        }
-
+                            .swipeActions {
+                                
+                            }
                     }
-                } .onDelete(perform: books.removeBook)
-                   
+                }
+                .onDelete(perform: books.removeBook)
             }
-            
             .navigationTitle("My Books")
             .navigationBarTitleDisplayMode(.inline)
-            
-            
         }
     }
     
@@ -116,3 +104,4 @@ struct BookView: View {
         }
     }
 }
+
