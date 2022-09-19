@@ -19,9 +19,12 @@ struct Item: Codable {
 
 struct Volume: Codable {
     let title: String
+    let description: String?
     let subtitle: String?
     let authors: [String]?
     let imageLinks: Images?
+    let pageCount: Int?
+    
 }
 struct Images:Codable {
     let smallThumbnail: String

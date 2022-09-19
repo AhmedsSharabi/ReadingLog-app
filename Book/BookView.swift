@@ -34,7 +34,7 @@ struct BookView: View {
             List {
                 ForEach(filteredBooks){ book in
                     NavigationLink {
-                        Text(book.readingState)
+                        DetailedBookView(books: book)
                     } label: {
                         HStack {
                             AsyncImage (url: URL(string: book.info.volumeInfo.imageLinks?.thumbnail ?? "no-image")) { image in
