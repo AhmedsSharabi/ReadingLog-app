@@ -24,6 +24,7 @@ struct Volume: Codable {
     let authors: [String]?
     let imageLinks: Images?
     let pageCount: Int?
+    let publishedDate: String?
     
 }
 struct Images:Codable {

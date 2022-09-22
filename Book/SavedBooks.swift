@@ -9,7 +9,7 @@ import SwiftUI
 
 class SavedBook: Identifiable, Codable {
     var id = UUID()
-    var info: Item = Item(id: "", volumeInfo: Volume(title: "",description: "", subtitle: "", authors: [], imageLinks: Images(smallThumbnail: "", thumbnail: ""),pageCount: 0))
+    var info: Item = Item(id: "", volumeInfo: Volume(title: "",description: "", subtitle: "", authors: [], imageLinks: Images(smallThumbnail: "", thumbnail: ""),pageCount: 0, publishedDate: ""))
     var notes = ""
     var readingState = ""
 }

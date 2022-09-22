@@ -36,6 +36,7 @@ struct SearchView: View {
                                 image
                                     .resizable()
                                     .scaledToFit()
+                                    .cornerRadius(5)
                                     .frame(width: 44, height: 64)
                             } placeholder: {
                                 ProgressView()
@@ -50,9 +51,9 @@ struct SearchView: View {
                         
                         VStack(alignment: .leading) {
                             Text(page.volumeInfo.title)
-                                .font(.headline)
+                                .font(.system(size: 15, weight: .light, design: .serif)).bold()
                             Text(page.volumeInfo.authors?[0] ?? "Unknown")
-                                .font(.caption)
+                                .font(.system(size: 13, weight: .light, design: .serif))
                                 .foregroundColor(.secondary)
                         }
                         .padding(.horizontal)

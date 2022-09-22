@@ -11,18 +11,33 @@ import SwiftUI
 
 struct ContentView: View {
     var books = Library()
+    @State private var selection = 0
     var body: some View {
-        TabView {
+        
+        TabView(selection: $selection) {
+            NavigationStack {
+                HomeView()
+            }
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            
             SearchView()
                 .tabItem {
                     Label("Add Book", systemImage: "plus")
                 }
-            BookView(filter: .all)
+                .tag(0)
+            NavigationStack {
+                BookView(filter: .all)
+            }
                 .tabItem {
                     Label("Books", systemImage: "books.vertical")
                 }
+                .tag(1)
         }
+        .tint(.purple)
         .environmentObject(books)
+        
     }
 }
 
