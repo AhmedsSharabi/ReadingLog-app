@@ -21,21 +21,21 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+                .tag(0)
             
             SearchView()
                 .tabItem {
                     Label("Add Book", systemImage: "plus")
                 }
-                .tag(0)
+                .tag(1)
             NavigationStack {
                 BookView(filter: .all)
             }
                 .tabItem {
                     Label("Books", systemImage: "books.vertical")
                 }
-                .tag(1)
+                .tag(2)
         }
-        .tint(.purple)
         .environmentObject(books)
         
     }

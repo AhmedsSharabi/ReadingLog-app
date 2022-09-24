@@ -10,7 +10,7 @@ import SwiftUI
 class SavedBook: Identifiable, Codable {
     var id = UUID()
     var info: Item = Item(id: "", volumeInfo: Volume(title: "",description: "", subtitle: "", authors: [], imageLinks: Images(smallThumbnail: "", thumbnail: ""),pageCount: 0, publishedDate: ""))
-    var notes = ""
+    var notes = [String]()
     var readingState = ""
 }
 
@@ -52,7 +52,11 @@ class Library: ObservableObject {
         case all, read, tbr, reading
     }
     
-    
+    func saveNote(_ book: SavedBook, note: String) {
+        objectWillChange.send()
+        book.notes.append(note)
+        save()
+    }
     
     
 }
