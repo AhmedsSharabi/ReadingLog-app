@@ -20,11 +20,13 @@ struct AddNotes_View: View {
             Form {
                 Section {
                     TextField ("This Notes is taken from: ", text: $noteheader)
+                        .multilineTextAlignment(.leading)
                 } header: {
                     Text("Add Header")
                 }
                 Section {
                     TextEditor(text: $noteDetails)
+                        .multilineTextAlignment(.leading)
                 } header: {
                     Text("Add Body")
                 }
@@ -41,7 +43,7 @@ struct AddNotes_View: View {
                 }
                 ToolbarItem(placement: .bottomBar){
                     Button {
-                        note = "FROM \(noteheader) \n \(noteDetails)"
+                        note = "FROM \(noteheader)\n\(noteDetails)"
                         books.saveNote(book, note: note)
                         dismiss()
 

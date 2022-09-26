@@ -70,6 +70,7 @@ struct BookView: View {
                         }
                     }
                     .onDelete(perform: books.removeBook)
+                    
                 }
                 .navigationTitle("My Books")
                 .navigationBarTitleDisplayMode(.inline)

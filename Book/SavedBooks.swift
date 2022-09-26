@@ -53,12 +53,11 @@ class Library: ObservableObject {
     }
     
     func saveNote(_ book: SavedBook, note: String) {
-        objectWillChange.send()
         book.notes.append(note)
         save()
     }
     
-    
+   
 }
 
     
